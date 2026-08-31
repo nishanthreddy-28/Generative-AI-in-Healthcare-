@@ -12,7 +12,6 @@ from typing import Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 
-# The required 8 features
 REQUIRED_FEATURES = [
     "Pregnancies", "Glucose", "BloodPressure", "SkinThickness",
     "Insulin", "BMI", "DiabetesPedigreeFunction", "Age"
@@ -66,20 +65,14 @@ def process_chat_turn(
     Extract features from the user_message, merging with current_features,
     while maintaining a natural conversational flow using the chat history.
     """
-    # Clean HTML tags helper to format previous messages
     def clean_html(text: str) -> str:
-        # Replace line breaks/paragraphs with standard spaces
         text = re.sub(r'</?(p|div|br|li|h\d)[^>]*>', ' \n', text)
-        # Strip all other HTML tags
         text = re.sub(r'<[^>]+>', '', text)
-        # Collapse multiple spaces/newlines
         text = re.sub(r'\n\s*\n', '\n', text)
         return text.strip()
 
-    # Determine if all features are collected or analysis was already completed
     all_collected = len(current_features) == len(REQUIRED_FEATURES)
-    
-    # Check history if it mentions successful risk assessment
+
     has_analysis_run = False
     model_prediction = None
     model_confidence = None
@@ -88,19 +81,16 @@ def process_chat_turn(
         content_lower = content.lower()
         if "completed the analysis" in content_lower or "result-card" in content_lower:
             has_analysis_run = True
-            
-            # Extract prediction
+
             if "positive class" in content_lower:
                 model_prediction = "positive"
             elif "negative class" in content_lower:
                 model_prediction = "negative"
-                
-            # Extract confidence (e.g. "80.8%")
+
             conf_match = re.search(r'(\d+(?:\.\d+)?)\s*%', content)
             if conf_match:
                 model_confidence = conf_match.group(1) + "%"
 
-    # Build system prompt dynamically based on the mode
     system_instructions = [
         "You are Clinicagen, a medical AI assistant that provides educational explanations based on a diabetes machine-learning prediction model and trusted medical sources.",
         "",
@@ -164,22 +154,19 @@ def process_chat_turn(
 
     system_prompt = "\n".join(system_instructions)
 
-    # Build messages list
     messages = [{"role": "system", "content": system_prompt}]
-    
-    # Map last 10 messages from history to keep context windows reasonable
+
     for msg in history[-10:]:
         role = "assistant" if msg.get("role") == "assistant" else "user"
         cleaned_content = clean_html(msg.get("content", ""))
         if cleaned_content:
             messages.append({"role": role, "content": cleaned_content})
-            
-    # Add current user message
+
     messages.append({"role": "user", "content": user_message})
 
     client = _get_client()
     model_name = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
-    
+
     try:
         completion = client.chat.completions.create(
             model=model_name,
@@ -187,20 +174,17 @@ def process_chat_turn(
             temperature=0.2,
             response_format={"type": "json_object"}
         )
-        
+
         raw_text = completion.choices[0].message.content
         raw_dict = json.loads(raw_text)
-        
-        # Extract features from raw response
+
         extracted = raw_dict.get("extracted_features", {})
-        
-        # Merge with current features using case-insensitive and underscore-insensitive mapping
-        # Only copy non-None features from current_features
+
         merged = {}
         for f in REQUIRED_FEATURES:
             if f in current_features and current_features[f] is not None:
                 merged[f] = current_features[f]
-                
+
         norm_map = {f.lower().replace("_", ""): f for f in REQUIRED_FEATURES}
         for k, v in extracted.items():
             norm_key = str(k).lower().replace("_", "")
@@ -208,22 +192,19 @@ def process_chat_turn(
                 real_key = norm_map[norm_key]
                 if v is not None:
                     try:
-                        # Save value as float if it's a number
                         merged[real_key] = float(v)
                     except (ValueError, TypeError):
                         pass
-                    
-        # Deterministically compute missing features list
+
         missing = [f for f in REQUIRED_FEATURES if f not in merged]
-        
-        # Populate final features with all required keys (missing set to None)
+
         final_features = {}
         for f in REQUIRED_FEATURES:
             if f in merged:
                 final_features[f] = merged[f]
             else:
                 final_features[f] = None
-        
+
         follow_up = raw_dict.get("follow_up_message", "")
         if not follow_up:
             if missing:
@@ -231,14 +212,12 @@ def process_chat_turn(
             else:
                 follow_up = "Thank you! All features collected."
         elif missing:
-            # Check if LLM prematurely outputted prediction details
             has_premature_pred = any(w in follow_up.lower() for w in ["confidence", "prediction", "classified", "positive class", "negative class"])
             if has_premature_pred or "complete" in follow_up.lower():
                 newly_extracted = [k for k, v in extracted.items() if v is not None and str(k).lower().replace("_", "") in norm_map]
                 if newly_extracted:
                     real_key = norm_map[newly_extracted[0].lower().replace("_", "")]
                     val = extracted[newly_extracted[0]]
-                    # Convert to float and format
                     try:
                         val = int(float(val)) if float(val).is_integer() else float(val)
                     except:
@@ -246,8 +225,7 @@ def process_chat_turn(
                     explanation = f"Thank you. Recorded {real_key} value as {val}."
                 else:
                     explanation = "Thank you."
-                
-                # Make the missing variable name reader-friendly
+
                 friendly_missing = missing[0]
                 if friendly_missing == "DiabetesPedigreeFunction":
                     friendly_missing = "Diabetes Pedigree Function (family history score)"
@@ -255,7 +233,7 @@ def process_chat_turn(
                     friendly_missing = "Blood Pressure"
                 elif friendly_missing == "SkinThickness":
                     friendly_missing = "Skin Thickness"
-                
+
                 follow_up = f"{explanation} We still need details for your {friendly_missing} to run the prediction model. Could you please provide that?"
 
         return ChatExtractionResponse(
@@ -263,23 +241,22 @@ def process_chat_turn(
             missing_features=missing,
             follow_up_message=follow_up
         )
-        
+
     except Exception as e:
         logger.error("Groq chat extraction failed: %s", type(e).__name__)
-        # Fallback response so the conversation doesn't die
         merged = {}
         for f in REQUIRED_FEATURES:
             if f in current_features and current_features[f] is not None:
                 merged[f] = current_features[f]
         missing = [f for f in REQUIRED_FEATURES if f not in merged]
-        
+
         final_features = {}
         for f in REQUIRED_FEATURES:
             if f in merged:
                 final_features[f] = merged[f]
             else:
                 final_features[f] = None
-                
+
         return ChatExtractionResponse(
             extracted_features=final_features,
             missing_features=missing,

@@ -35,9 +35,6 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
-# ---------------------------------------------------------------------------
-# Load environment
-# ---------------------------------------------------------------------------
 load_dotenv()
 
 logging.basicConfig(
@@ -46,35 +43,24 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-MAX_BODY_SIZE    = 16 * 1024  # 16 KB
-REQUEST_TIMEOUT  = 90         # seconds — covers embeddings + FAISS + LLM (30 s) + overhead
+MAX_BODY_SIZE    = 16 * 1024
+REQUEST_TIMEOUT  = 90
 
-# ---------------------------------------------------------------------------
-# Rate limiter
-# ---------------------------------------------------------------------------
 limiter = Limiter(key_func=get_remote_address, default_limits=["10/minute"])
 
 
-# ---------------------------------------------------------------------------
-# Startup / shutdown
-# ---------------------------------------------------------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Load ML artifacts at startup (fail fast if missing)
     try:
         from services.prediction_service import PredictionService
         PredictionService.get()
         logger.info("ML artifacts loaded successfully at startup.")
     except Exception as e:
         logger.error("Failed to load ML artifacts: %s", type(e).__name__)
-        # We don't abort startup — the /analyze endpoint will return a clear error.
 
-    yield   # Application runs here
+    yield
 
 
-# ---------------------------------------------------------------------------
-# App
-# ---------------------------------------------------------------------------
 app = FastAPI(
     title="Clinicagen API",
     description=(
@@ -90,8 +76,6 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS — restricted to frontend origins; "null" is intentionally excluded
-# (null origin is used by file:// pages and sandboxed iframes, not trusted frontends)
 CORS_ORIGINS = [
     o.strip()
     for o in os.getenv("CORS_ORIGINS",
@@ -122,9 +106,6 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
 class BodySizeError(Exception):
     pass
 
-# ---------------------------------------------------------------------------
-# Body-size middleware
-# ---------------------------------------------------------------------------
 @app.middleware("http")
 async def limit_body_size(request: Request, call_next):
     cl = request.headers.get("content-length")
@@ -133,7 +114,7 @@ async def limit_body_size(request: Request, call_next):
             status_code=413,
             content={"error": "Request body too large (max 4 KB)."}
         )
-        
+
     receive_ = request.receive
     bytes_received = 0
     request.scope["body_size_exceeded"] = False
@@ -186,7 +167,7 @@ async def chat_endpoint(request: Request, chat_input: ChatInput):
     from llm.chat_agent import process_chat_turn
     try:
         extraction = process_chat_turn(
-            chat_input.message, 
+            chat_input.message,
             chat_input.current_features,
             [h.model_dump() for h in chat_input.history]
         )
@@ -196,9 +177,6 @@ async def chat_endpoint(request: Request, chat_input: ChatInput):
         raise HTTPException(status_code=500, detail="Internal chat error.")
 
 
-# ---------------------------------------------------------------------------
-# Input model
-# ---------------------------------------------------------------------------
 class PatientInput(BaseModel):
     """Strict input model — rejects strings, booleans, NaN, and Infinity."""
     Pregnancies:              float = Field(..., ge=0, le=20)
@@ -220,10 +198,8 @@ class PatientInput(BaseModel):
     @classmethod
     def reject_non_numeric(cls, v):
         """Reject strings, booleans, NaN, and Infinity before Pydantic coercion."""
-        # booleans are subclasses of int in Python — reject them explicitly
         if isinstance(v, bool):
             raise ValueError("Must be a numeric value, not a boolean.")
-        # reject strings (Pydantic would otherwise coerce "148" -> 148.0)
         if isinstance(v, str):
             raise ValueError("Must be a number, not a string.")
         import math
@@ -236,9 +212,6 @@ class PatientInput(BaseModel):
         return v
 
 
-# ---------------------------------------------------------------------------
-# Endpoints
-# ---------------------------------------------------------------------------
 
 @app.get("/api/health")
 async def health():
@@ -247,7 +220,6 @@ async def health():
     from rag.vector_store import INDEX_PATH, METADATA_PATH, MANIFEST_PATH
 
     ml_ready = False
-    # RAG is only ready when all three vector store files exist (not just the manifest)
     rag_ready = INDEX_PATH.exists() and METADATA_PATH.exists() and MANIFEST_PATH.exists()
 
     try:
@@ -282,11 +254,9 @@ async def analyze(request: Request, patient: PatientInput):
         return result
 
     except Exception as e:
-        # Catch-all: never expose stack trace or config
         cls_name = type(e).__name__
         logger.error("Analysis pipeline error: %s", cls_name)
 
-        # Distinguish validation errors from server errors
         if "ValidationError" in cls_name or "validation" in str(e).lower():
             raise HTTPException(status_code=400, detail=str(e))
 
@@ -302,9 +272,6 @@ async def analyze(request: Request, patient: PatientInput):
         )
 
 
-# ---------------------------------------------------------------------------
-# Serve Frontend Static Files
-# ---------------------------------------------------------------------------
 from fastapi.responses import FileResponse
 
 @app.get("/")

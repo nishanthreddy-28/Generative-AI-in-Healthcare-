@@ -107,7 +107,7 @@ function loadChatState(chatId) {
       appendMessageDOM(msg.role, msg.content);
     });
   }
-  
+
   reconstructSourcesFromHistory();
   scrollToBottom();
 }
@@ -173,7 +173,7 @@ function renderSidebarChats() {
   if (!historyList) return;
   const chats = getStoredChats();
   historyList.innerHTML = '';
-  
+
   const sortedKeys = Object.keys(chats).sort((a, b) => {
     const ta = parseInt(a.replace('chat_', '')) || 0;
     const tb = parseInt(b.replace('chat_', '')) || 0;
@@ -234,25 +234,25 @@ function escapeHtml(str) {
 function formatMarkdownToHtml(text) {
   if (!text) return '';
   let escaped = escapeHtml(text);
-  
+
   // Replace bold syntax **bold** -> <strong>bold</strong>
   escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  
-  // Replace headers: e.g. ### Header -> <h4>Header</h4>
+
+  // Replace headers: e.g.
   escaped = escaped.replace(/(?:^|\n)###\s+([^\n]+)/g, '\n<h4 style="margin: 10px 0 5px 0; color: var(--text-main); font-size: 0.95rem;">$1</h4>');
   escaped = escaped.replace(/(?:^|\n)##\s+([^\n]+)/g, '\n<h4 style="margin: 12px 0 6px 0; color: var(--text-main); font-size: 1rem;">$1</h4>');
-  
+
   // Replace bullet lists: * item or - item -> <li>item</li>
   escaped = escaped.replace(/(?:^|\n)[*\-]\s+([^\n]+)/g, '\n<li>$1</li>');
-  
+
   // Group consecutive <li> items into <ul> blocks
   // Since we have \n<li>, we can replace sequences of them
   escaped = escaped.replace(/((?:\n<li>.*?<\/li>)+)/g, '\n<ul style="margin: 8px 0 8px 20px; padding-left: 0;">$1\n</ul>');
-  
+
   // Replace numbered lists: 1. item -> <li>item</li>
   escaped = escaped.replace(/(?:^|\n)(\d+)\.\s+([^\n]+)/g, '\n<li data-index="$1">$2</li>');
   escaped = escaped.replace(/((?:\n<li data-index=.*?<\/li>)+)/g, '\n<ol style="margin: 8px 0 8px 20px; padding-left: 0;">$1\n</ol>');
-  
+
   // Split paragraphs by double newlines or single newlines that are not inside lists
   const lines = escaped.split(/\n\n+/);
   const formattedParagraphs = lines.map(p => {
@@ -263,7 +263,7 @@ function formatMarkdownToHtml(text) {
     }
     return `<p style="margin-bottom: 8px; line-height: 1.55;">${trimmed.replace(/\n/g, '<br>')}</p>`;
   });
-  
+
   return formattedParagraphs.filter(Boolean).join('');
 }
 
@@ -271,22 +271,22 @@ function formatMarkdownToHtml(text) {
 function appendMessageDOM(sender, htmlContent) {
   const rowDiv = document.createElement('div');
   rowDiv.className = `message-row ${sender}`;
-  
+
   const innerDiv = document.createElement('div');
   innerDiv.className = 'message-inner';
-  
+
   const avatar = document.createElement('div');
   avatar.className = `avatar ${sender}-avatar`;
   avatar.innerHTML = sender === 'user' ? userSvg : assistantSvg;
-  
+
   const content = document.createElement('div');
   content.className = 'content';
   content.innerHTML = htmlContent;
-  
+
   innerDiv.appendChild(avatar);
   innerDiv.appendChild(content);
   rowDiv.appendChild(innerDiv);
-  
+
   chatHistory.appendChild(rowDiv);
 }
 
@@ -298,7 +298,7 @@ function appendMessage(sender, htmlContent) {
     // Append the hardcoded welcome message to match background history log
     appendMessageDOM('assistant', welcomeMessage);
   }
-  
+
   appendMessageDOM(sender, htmlContent);
   messageHistory.push({ role: sender, content: htmlContent });
   saveCurrentChatState();
@@ -322,10 +322,10 @@ function generateResultHTML(data) {
   const label = data.risk_label || '';
   const badgeClass = pred === 1 ? 'positive' : 'negative';
   const badgeText = pred === 1 ? 'Positive Class' : 'Negative Class';
-  
+
   const chunkMap = {};
   const sourcesList = data.explanation?.sources || [];
-  
+
   sourcesList.forEach((s, idx) => {
     chunkMap[s.chunk_id] = {
       index: idx + 1,
@@ -337,9 +337,9 @@ function generateResultHTML(data) {
       score: s.score
     };
   });
-  
+
   window.currentSources = chunkMap;
-  
+
   function renderCitations(citationIds) {
     if (!citationIds || citationIds.length === 0) return '';
     return citationIds
@@ -351,7 +351,7 @@ function generateResultHTML(data) {
       .filter(Boolean)
       .join('');
   }
-  
+
   let html = `
     <p>I have gathered all the necessary information and completed the analysis.</p>
     <div class="result-card">
@@ -370,7 +370,7 @@ function generateResultHTML(data) {
   if (data.explanation_status === 'success' && data.explanation) {
     const expl = data.explanation;
     const summaryCitations = renderCitations(expl.medical_context_citation_chunk_ids);
-    
+
     html += `
       <div class="analysis-explanation-section" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
         <p><strong>Analysis:</strong> ${escapeHtml(expl.summary)} ${summaryCitations}</p>
@@ -429,7 +429,7 @@ function generateResultHTML(data) {
       html += `<p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 15px; text-align: center; line-height: 1.3;">${escapeHtml(expl.disclaimer)}</p>`;
     }
   } else if (data.explanation_status === 'fallback') {
-      html += `<p style="margin-top:10px; color: #ca8a04;">${escapeHtml(data.explanation_message)}</p>`;
+      html += `<p style="margin-top:10px; color:
   } else {
       html += `<p style="margin-top:10px; color: var(--error);">${escapeHtml(data.explanation_message)}</p>`;
   }
@@ -437,14 +437,14 @@ function generateResultHTML(data) {
   if (data.rag_query || (data.retrieved_sources && data.retrieved_sources.length > 0)) {
     const queryStr = data.rag_query || "N/A";
     const sourcesCount = data.retrieved_sources ? data.retrieved_sources.length : 0;
-    
+
     html += `
       <div class="rag-inspector" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
         <button type="button" class="rag-inspector-toggle" onclick="toggleRagInspector(this)" style="background: var(--bg-input); border: 1px solid var(--border-color); width: 100%; text-align: left; padding: 10px 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; color: var(--text-main); font-family: inherit; font-size: 0.85rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
           <span>🔍 RAG Pipeline Inspector (Top 5 Retrieved Chunks)</span>
           <span class="toggle-icon">▲</span>
         </button>
-        <div class="rag-inspector-content" style="display: block; padding: 12px; background: #f9fafb; border: 1px solid var(--border-color); border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; font-size: 0.8rem;">
+        <div class="rag-inspector-content" style="display: block; padding: 12px; background:
           <div style="margin-bottom: 10px;">
             <strong style="color: var(--accent-primary); display: block; margin-bottom: 3px;">Generated Search Query:</strong>
             <div style="background: var(--bg-main); padding: 8px; border-radius: 4px; font-family: monospace; border: 1px solid var(--border-color); line-height: 1.3;">${escapeHtml(queryStr)}</div>
@@ -453,19 +453,19 @@ function generateResultHTML(data) {
             <strong style="color: var(--accent-secondary); display: block; margin-bottom: 5px;">FAISS Retrieved Chunks (Similarity Threshold: 0.35):</strong>
             <div class="retrieved-documents-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; padding-right: 5px;">
     `;
-    
+
     if (sourcesCount > 0) {
       data.retrieved_sources.forEach((s, idx) => {
         const urlLink = s.url ? `<a href="${escapeHtml(s.url)}" target="_blank" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">Link ↗</a>` : '';
         const matchPct = (s.score * 100).toFixed(1);
-        
+
         let scoreColor = '#dc2626'; // low
         if (s.score >= 0.55) {
           scoreColor = '#16a34a'; // high
         } else if (s.score >= 0.4) {
           scoreColor = '#ca8a04'; // medium
         }
-        
+
         html += `
           <div class="retrieved-doc-item" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 8px; border-radius: 6px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; border-bottom: 1px solid var(--border-color); padding-bottom: 4px; font-size: 0.75rem; color: var(--text-muted);">
@@ -480,9 +480,9 @@ function generateResultHTML(data) {
         `;
       });
     } else {
-      html += `<p style="margin: 0; color: #dc2626;">No documents met the similarity threshold.</p>`;
+      html += `<p style="margin: 0; color:
     }
-    
+
     html += `
             </div>
           </div>
@@ -534,15 +534,15 @@ window.showCitationTooltip = function(event, chunkId) {
 
   const rect = event.target.getBoundingClientRect();
   const popoverWidth = 320;
-  
+
   let left = rect.left + window.scrollX - popoverWidth / 2 + rect.width / 2;
   let top = rect.bottom + window.scrollY + 8;
-  
+
   if (left < 10) left = 10;
   if (left + popoverWidth > window.innerWidth - 10) {
     left = window.innerWidth - popoverWidth - 10;
   }
-  
+
   popover.style.left = `${left}px`;
   popover.style.top = `${top}px`;
   popover.style.display = 'block';
@@ -606,14 +606,14 @@ async function handleChatSubmit(e) {
       try {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = text;
-        
+
         // Remove massive blocks like the RAG Pipeline Inspector
         const inspector = tempDiv.querySelector('.rag-inspector');
         if (inspector) inspector.remove();
-        
+
         // Remove citation badges
         tempDiv.querySelectorAll('.citation-badge').forEach(el => el.remove());
-        
+
         text = tempDiv.innerText || tempDiv.textContent || '';
       } catch (e) {
         // Fallback to regex cleaning if DOM parsing fails
@@ -629,17 +629,17 @@ async function handleChatSubmit(e) {
     const chatRes = await fetch(CHAT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        message: text, 
+      body: JSON.stringify({
+        message: text,
         current_features: currentFeatures,
         history: cleanedHistory
       })
     });
-    
+
     if (!chatRes.ok) throw new Error('Failed to process message.');
     const chatData = await chatRes.json();
     currentFeatures = chatData.extracted_features;
-    
+
     // Save current features to chat object
     saveCurrentChatState();
 
@@ -675,7 +675,7 @@ async function handleChatSubmit(e) {
       saveCurrentChatState();
 
       hideTyping();
-      
+
       const resultHtml = generateResultHTML(analysisData);
       appendMessage('assistant', resultHtml);
     } else {
