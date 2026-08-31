@@ -1,0 +1,74 @@
+[
+  {
+    "id": "niddk-diabetes-overview",
+    "publisher": "NIDDK (National Institute of Diabetes and Digestive and Kidney Diseases)",
+    "title": "What Is Diabetes?",
+    "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes",
+    "allowed_domains": ["niddk.nih.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. NIH educational content freely redistributable."
+  },
+  {
+    "id": "niddk-diabetes-risk",
+    "publisher": "NIDDK (National Institute of Diabetes and Digestive and Kidney Diseases)",
+    "title": "Risk Factors for Type 2 Diabetes",
+    "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/risk-factors-type-2-diabetes",
+    "allowed_domains": ["niddk.nih.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. NIH educational content freely redistributable."
+  },
+  {
+    "id": "niddk-insulin-resistance",
+    "publisher": "NIDDK (National Institute of Diabetes and Digestive and Kidney Diseases)",
+    "title": "Insulin Resistance and Prediabetes",
+    "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/prediabetes-insulin-resistance",
+    "allowed_domains": ["niddk.nih.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. NIH educational content freely redistributable."
+  },
+  {
+    "id": "cdc-diabetes-risk-factors",
+    "publisher": "CDC (Centers for Disease Control and Prevention)",
+    "title": "Diabetes Risk Factors",
+    "url": "https://www.cdc.gov/diabetes/risk-factors/index.html",
+    "allowed_domains": ["cdc.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. CDC educational content freely redistributable."
+  },
+  {
+    "id": "cdc-diabetes-symptoms",
+    "publisher": "CDC (Centers for Disease Control and Prevention)",
+    "title": "Diabetes Symptoms",
+    "url": "https://www.cdc.gov/diabetes/signs-symptoms/index.html",
+    "allowed_domains": ["cdc.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. CDC educational content freely redistributable."
+  },
+  {
+    "id": "cdc-gestational-diabetes",
+    "publisher": "CDC (Centers for Disease Control and Prevention)",
+    "title": "Gestational Diabetes",
+    "url": "https://www.cdc.gov/diabetes/about/gestational-diabetes.html",
+    "allowed_domains": ["cdc.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. CDC educational content freely redistributable."
+  },
+  {
+    "id": "nih-obesity-diabetes",
+    "publisher": "NIH National Library of Medicine / MedlinePlus",
+    "title": "Obesity and Diabetes",
+    "url": "https://medlineplus.gov/diabetestype2.html",
+    "allowed_domains": ["medlineplus.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. NLM educational content freely redistributable."
+  },
+  {
+    "id": "niddk-diabetes-prevention",
+    "publisher": "NIDDK (National Institute of Diabetes and Digestive and Kidney Diseases)",
+    "title": "Preventing Type 2 Diabetes",
+    "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/preventing-type-2-diabetes",
+    "allowed_domains": ["niddk.nih.gov"],
+    "expected_type": "html_to_text",
+    "license_or_terms_note": "U.S. Government public domain. NIH educational content freely redistributable."
+  }
+]

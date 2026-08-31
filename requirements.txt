@@ -1,0 +1,41 @@
+# =============================================================================
+# Pima Indians Diabetes ML + RAG + LLM Pipeline
+# Requirements — pinned for reproducibility
+# =============================================================================
+
+# --- ML / Reproducibility ---
+scikit-learn==1.8.0
+xgboost>=2.0.0
+numpy>=2.4.0
+pandas>=2.3.0
+joblib>=1.5.0
+matplotlib>=3.9.0
+seaborn>=0.13.0
+
+# --- RAG ---
+faiss-cpu>=1.8.0
+sentence-transformers>=3.0.0
+pypdf>=4.0.0
+
+# --- Backend API ---
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9
+slowapi>=0.1.9
+
+# --- LLM ---
+groq>=0.9.0
+
+# --- Environment / Config ---
+python-dotenv>=1.0.0
+pydantic>=2.7.0
+
+# --- HTTP (for medical source downloader) ---
+requests>=2.32.0
+beautifulsoup4>=4.12.0
+lxml>=5.2.0
+
+# --- Testing ---
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+httpx>=0.27.0

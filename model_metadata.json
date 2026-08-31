@@ -1,0 +1,40 @@
+{
+  "best_model": "SVM (RBF)",
+  "feature_order": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "zero_as_missing_columns": [
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI"
+  ],
+  "metrics": {
+    "Train_Acc": 0.8908794788273615,
+    "Test_Acc": 0.8441558441558441,
+    "Train_F1": 0.8559139784946237,
+    "Test_F1": 0.8,
+    "Precision": 0.7272727272727273,
+    "Recall": 0.8888888888888888,
+    "ROC_AUC": 0.898148148148148
+  },
+  "class_distribution": {
+    "0": 500,
+    "1": 268
+  },
+  "scale_pos_weight_used_for_xgboost": 1.8656716417910448,
+  "preprocessing_order": [
+    "train_test_split(stratified)",
+    "KNNImputer(fit on train)",
+    "StandardScaler(fit on train)"
+  ],
+  "_rebuild_note": "REPRODUCIBILITY REBUILD \u2014 authorized 2026-08-27. Identical to Notebook Cell 1. Not a new training run."
+}

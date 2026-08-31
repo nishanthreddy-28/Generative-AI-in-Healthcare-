@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is the relationship between blood glucose levels and diabetes?",
+    "expected_document_ids": ["niddk-diabetes-overview", "niddk-insulin-resistance"],
+    "expected_topics": ["blood glucose", "diabetes", "glucose threshold"]
+  },
+  {
+    "question": "How is BMI related to the risk of developing Type 2 diabetes?",
+    "expected_document_ids": ["niddk-diabetes-risk", "cdc-diabetes-risk-factors"],
+    "expected_topics": ["BMI", "obesity", "diabetes risk", "body weight"]
+  },
+  {
+    "question": "Why is age considered a risk factor for diabetes?",
+    "expected_document_ids": ["niddk-diabetes-risk", "cdc-diabetes-risk-factors"],
+    "expected_topics": ["age", "older adults", "diabetes risk"]
+  },
+  {
+    "question": "What is insulin resistance and how does it relate to Type 2 diabetes?",
+    "expected_document_ids": ["niddk-insulin-resistance"],
+    "expected_topics": ["insulin resistance", "prediabetes", "Type 2 diabetes"]
+  },
+  {
+    "question": "How does family history affect diabetes risk?",
+    "expected_document_ids": ["niddk-diabetes-risk", "cdc-diabetes-risk-factors"],
+    "expected_topics": ["family history", "genetics", "diabetes pedigree"]
+  },
+  {
+    "question": "What is gestational diabetes and can it increase later diabetes risk?",
+    "expected_document_ids": ["cdc-gestational-diabetes"],
+    "expected_topics": ["gestational diabetes", "pregnancy", "Type 2 diabetes risk"]
+  },
+  {
+    "question": "What lifestyle changes can reduce the risk of developing diabetes?",
+    "expected_document_ids": ["niddk-diabetes-prevention"],
+    "expected_topics": ["prevention", "physical activity", "diet", "weight loss"]
+  },
+  {
+    "question": "What are the common symptoms or warning signs of diabetes?",
+    "expected_document_ids": ["cdc-diabetes-symptoms"],
+    "expected_topics": ["symptoms", "warning signs", "diabetes signs"]
+  }
+]
