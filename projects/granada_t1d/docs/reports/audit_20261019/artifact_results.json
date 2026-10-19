@@ -1,0 +1,231 @@
+{
+  "Phase_2_Latent_VAE/best_compact_vae.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "epoch",
+      "model_state_dict",
+      "val_loss",
+      "n_dyn",
+      "n_stat",
+      "n_pure_dynamic",
+      "latent_dim",
+      "hidden_dim",
+      "seq_len"
+    ],
+    "tensor_checks": {
+      "arrays": 42,
+      "elements": 240421,
+      "nonfinite": 0
+    }
+  },
+  "Phase_2_Latent_VAE/latent_health_vectors.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "mu_train",
+      "z_train",
+      "meta_train",
+      "mu_val",
+      "z_val",
+      "meta_val",
+      "mu_test",
+      "z_test",
+      "meta_test",
+      "latent_dim",
+      "train_pats",
+      "val_pats",
+      "test_pats"
+    ],
+    "tensor_checks": {
+      "arrays": 6,
+      "elements": 448192,
+      "nonfinite": 0
+    }
+  },
+  "Phase_2_Latent_VAE/timeseries_tensors.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "X_train",
+      "X_val",
+      "X_test",
+      "train_pats",
+      "val_pats",
+      "test_pats",
+      "meta_train",
+      "meta_val",
+      "meta_test",
+      "input_cols",
+      "scaler_params",
+      "n_pure_dynamic",
+      "n_dyn",
+      "n_stat"
+    ],
+    "tensor_checks": {
+      "arrays": 3,
+      "elements": 21009000,
+      "nonfinite": 0
+    }
+  },
+  "Phase_3_Generative_Forecasting/best_baseline_lstm.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "proj.0.weight",
+      "proj.0.bias",
+      "lstm.weight_ih_l0",
+      "lstm.weight_hh_l0",
+      "lstm.bias_ih_l0",
+      "lstm.bias_hh_l0",
+      "lstm.weight_ih_l1",
+      "lstm.weight_hh_l1",
+      "lstm.bias_ih_l1",
+      "lstm.bias_hh_l1",
+      "head.weight",
+      "head.bias"
+    ],
+    "tensor_checks": {
+      "arrays": 12,
+      "elements": 68422,
+      "nonfinite": 0
+    }
+  },
+  "Phase_3_Generative_Forecasting/best_ctgan_generator.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "epoch",
+      "generator_state_dict",
+      "discriminator_state_dict",
+      "best_val_mae",
+      "cond_dim",
+      "noise_dim",
+      "target_dim",
+      "target_cols",
+      "static_cols",
+      "target_mean",
+      "target_std",
+      "static_mean",
+      "static_std"
+    ],
+    "tensor_checks": {
+      "arrays": 36,
+      "elements": 111479,
+      "nonfinite": 0
+    }
+  },
+  "Phase_3_Generative_Forecasting/best_temporal_cgan_generator.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "init_proj.0.weight",
+      "init_proj.0.bias",
+      "gru.weight_ih_l0",
+      "gru.weight_hh_l0",
+      "gru.bias_ih_l0",
+      "gru.bias_hh_l0",
+      "gru.weight_ih_l1",
+      "gru.weight_hh_l1",
+      "gru.bias_ih_l1",
+      "gru.bias_hh_l1",
+      "head.weight",
+      "head.bias"
+    ],
+    "tensor_checks": {
+      "arrays": 12,
+      "elements": 52806,
+      "nonfinite": 0
+    }
+  },
+  "Phase_3_Generative_Forecasting/best_trajectory_forecaster.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "epoch",
+      "model_state_dict",
+      "val_loss",
+      "latent_dim",
+      "target_dim",
+      "hidden_dim",
+      "out_len",
+      "target_cols",
+      "target_mean",
+      "target_std"
+    ],
+    "tensor_checks": {
+      "arrays": 16,
+      "elements": 50386,
+      "nonfinite": 0
+    }
+  },
+  "Phase_5_Application/models/cgm/release_001/pattern_forecaster.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "history_encoder.weight_ih_l0",
+      "history_encoder.weight_hh_l0",
+      "history_encoder.bias_ih_l0",
+      "history_encoder.bias_hh_l0",
+      "head.0.weight",
+      "head.0.bias",
+      "head.2.weight",
+      "head.2.bias"
+    ],
+    "tensor_checks": {
+      "arrays": 8,
+      "elements": 32016,
+      "nonfinite": 0
+    }
+  },
+  "Phase_5_Application/models/cgm/release_001/pattern_vae.pt": {
+    "restricted_load": true,
+    "top_level_keys": [
+      "encoder.weight_ih_l0",
+      "encoder.weight_hh_l0",
+      "encoder.bias_ih_l0",
+      "encoder.bias_hh_l0",
+      "mu.weight",
+      "mu.bias",
+      "logvar.weight",
+      "logvar.bias",
+      "decoder.0.weight",
+      "decoder.0.bias",
+      "decoder.2.weight",
+      "decoder.2.bias"
+    ],
+    "tensor_checks": {
+      "arrays": 12,
+      "elements": 13592,
+      "nonfinite": 0
+    }
+  },
+  "phase2_rebuild": {
+    "exception": "KeyError",
+    "message": "'split'"
+  },
+  "legacy_forecast_pairs": {
+    "train": {
+      "windows": 4360,
+      "patients": 205,
+      "target_shape": [
+        4360,
+        60,
+        6
+      ],
+      "finite": true
+    },
+    "val": {
+      "windows": 855,
+      "patients": 43,
+      "target_shape": [
+        855,
+        60,
+        6
+      ],
+      "finite": true
+    },
+    "test": {
+      "windows": 953,
+      "patients": 42,
+      "target_shape": [
+        953,
+        60,
+        6
+      ],
+      "finite": true
+    }
+  }
+}

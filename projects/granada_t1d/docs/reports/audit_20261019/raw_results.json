@@ -1,0 +1,21 @@
+{
+  "raw_rows": 22671708,
+  "patients_processed": 736,
+  "missing_cells": 0,
+  "conflicting_timestamps": 22026,
+  "exact_duplicates_removed_after_conflicts": 0,
+  "readings_combined_in_bins": 354937,
+  "excluded_low_coverage_days": 23602,
+  "retained_days": 234180,
+  "missing_saved_days": 0,
+  "extra_saved_days": 0,
+  "metric_mismatched_days": 0,
+  "max_absolute_error": {
+    "readings_count": 0.0,
+    "glucose_mean": 5.684341886080802e-14,
+    "glucose_std": 5.684341886080802e-14,
+    "tir_70_180": 1.4210854715202004e-14,
+    "tbr_below_70": 7.105427357601002e-15,
+    "glucose_cv": 2.842170943040401e-14
+  }
+}

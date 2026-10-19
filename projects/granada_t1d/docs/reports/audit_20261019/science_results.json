@@ -1,0 +1,406 @@
+{
+  "tables": {
+    "legacy_daily": {
+      "rows": 221366,
+      "patients": 593,
+      "columns": [
+        "Patient_ID",
+        "date",
+        "readings_count",
+        "glucose_mean",
+        "glucose_std",
+        "glucose_cv",
+        "glucose_min",
+        "glucose_max",
+        "tir_70_180",
+        "tbr_below_70",
+        "tbr_severe_54",
+        "tar_above_180",
+        "tar_severe_250",
+        "nocturnal_mean",
+        "nocturnal_hypo_count",
+        "gmi_estimated_a1c",
+        "lab_albumin_urine",
+        "lab_creatinine",
+        "lab_creatinine_urine",
+        "lab_ggt",
+        "lab_glucose",
+        "lab_gpt_alt",
+        "lab_hba1c",
+        "lab_hdl_cholesterol",
+        "lab_potassium",
+        "lab_sodium",
+        "lab_total_cholesterol",
+        "lab_triglycerides",
+        "lab_tsh",
+        "lab_uric_acid",
+        "lab_hba1c_imputed",
+        "lab_glucose_imputed",
+        "lab_creatinine_imputed",
+        "lab_creatinine_urine_imputed",
+        "lab_albumin_urine_imputed",
+        "lab_total_cholesterol_imputed",
+        "lab_hdl_cholesterol_imputed",
+        "lab_triglycerides_imputed",
+        "lab_potassium_imputed",
+        "lab_sodium_imputed",
+        "lab_gpt_alt_imputed",
+        "lab_ggt_imputed",
+        "lab_tsh_imputed",
+        "lab_uric_acid_imputed",
+        "sex_male",
+        "hypothyroidism",
+        "retinopathy",
+        "hypertension",
+        "dyslipidemia",
+        "nephropathy",
+        "neuropathy",
+        "dka_history",
+        "age"
+      ],
+      "missing_cells": 0,
+      "duplicate_keys": 0
+    },
+    "cohort_metadata": {
+      "rows": 593,
+      "patients": 593,
+      "columns": [
+        "Patient_ID",
+        "Sex",
+        "sex_male",
+        "Birth_year",
+        "Number_of_days_with_measures",
+        "Number_of_measurements",
+        "hypothyroidism",
+        "retinopathy",
+        "hypertension",
+        "dyslipidemia",
+        "nephropathy",
+        "neuropathy",
+        "dka_history"
+      ],
+      "missing_cells": 0,
+      "duplicate_keys": 0
+    },
+    "raw_patient": {
+      "rows": 736,
+      "patients": 736,
+      "columns": [
+        "Patient_ID",
+        "Sex",
+        "Birth_year",
+        "Initial_measurement_date",
+        "Final_measurement_date",
+        "Number_of_days_with_measures",
+        "Number_of_measurements",
+        "Initial_biochemical_parameters_date",
+        "Final_biochemical_parameters_date",
+        "Number_of_biochemical_parameters",
+        "Number_of_diagnostics"
+      ],
+      "missing_cells": 264,
+      "duplicate_keys": 0
+    },
+    "raw_labs": {
+      "rows": 87482,
+      "patients": 723,
+      "columns": [
+        "Patient_ID",
+        "Reception_date",
+        "Name",
+        "Value"
+      ],
+      "missing_cells": 0,
+      "duplicate_keys": 1808
+    },
+    "raw_diagnoses": {
+      "rows": 1757,
+      "patients": 511,
+      "columns": [
+        "Patient_ID",
+        "Code",
+        "Description"
+      ],
+      "missing_cells": 0,
+      "duplicate_keys": 24
+    }
+  },
+  "legacy_splits": {
+    "counts": {
+      "train": 415,
+      "val": 88,
+      "test": 90
+    },
+    "overlap_counts": {
+      "train_val": 0,
+      "train_test": 0,
+      "val_test": 0
+    },
+    "cleaned_daily_has_split": false,
+    "cohort_metadata_has_split": false,
+    "tensors": {
+      "X_train": {
+        "shape": [
+          9885,
+          30,
+          50
+        ],
+        "finite": true
+      },
+      "X_val": {
+        "shape": [
+          2053,
+          30,
+          50
+        ],
+        "finite": true
+      },
+      "X_test": {
+        "shape": [
+          2068,
+          30,
+          50
+        ],
+        "finite": true
+      }
+    }
+  },
+  "legacy_window_dates": {
+    "train": {
+      "window_count": 9885,
+      "invalid_endpoint_spans": 0,
+      "patients_outside_split": 0
+    },
+    "val": {
+      "window_count": 2053,
+      "invalid_endpoint_spans": 0,
+      "patients_outside_split": 0
+    },
+    "test": {
+      "window_count": 2068,
+      "invalid_endpoint_spans": 0,
+      "patients_outside_split": 0
+    }
+  },
+  "legacy_scaler": {
+    "features": 50,
+    "max_abs_mean_error_vs_train": 4.920869201896494e-06,
+    "max_abs_std_error_vs_train": 1.3624028412095868e-06
+  },
+  "legacy_imputation": {
+    "lab_albumin_urine": {
+      "imputed_rows": 96266,
+      "distinct_imputed_values": 1,
+      "single_fill": 0.7,
+      "all_cohort_median": 0.7,
+      "train_median": 0.7,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_creatinine": {
+      "imputed_rows": 52092,
+      "distinct_imputed_values": 1,
+      "single_fill": 0.79,
+      "all_cohort_median": 0.79,
+      "train_median": 0.78,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_creatinine_urine": {
+      "imputed_rows": 94298,
+      "distinct_imputed_values": 1,
+      "single_fill": 103.245,
+      "all_cohort_median": 103.245,
+      "train_median": 102.93,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_ggt": {
+      "imputed_rows": 73937,
+      "distinct_imputed_values": 1,
+      "single_fill": 18.0,
+      "all_cohort_median": 18.0,
+      "train_median": 18.0,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_glucose": {
+      "imputed_rows": 52435,
+      "distinct_imputed_values": 1,
+      "single_fill": 144.0,
+      "all_cohort_median": 144.0,
+      "train_median": 143.0,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_gpt_alt": {
+      "imputed_rows": 62314,
+      "distinct_imputed_values": 1,
+      "single_fill": 18.0,
+      "all_cohort_median": 18.0,
+      "train_median": 18.0,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_hba1c": {
+      "imputed_rows": 83365,
+      "distinct_imputed_values": 1,
+      "single_fill": 7.6,
+      "all_cohort_median": 7.6,
+      "train_median": 7.6,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_hdl_cholesterol": {
+      "imputed_rows": 77406,
+      "distinct_imputed_values": 1,
+      "single_fill": 56.0,
+      "all_cohort_median": 56.0,
+      "train_median": 56.0,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_potassium": {
+      "imputed_rows": 61660,
+      "distinct_imputed_values": 1,
+      "single_fill": 4.4,
+      "all_cohort_median": 4.4,
+      "train_median": 4.4,
+      "matches_all_median": true,
+      "matches_train_median": true
+    },
+    "lab_sodium": {
+      "imputed_rows": 61689,
+      "distinct_imputed_values": 1,
+      "single_fill": 138.0,
+      "all_cohort_median": 138.0,
+      "train_median": 139.0,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_total_cholesterol": {
+      "imputed_rows": 66902,
+      "distinct_imputed_values": 1,
+      "single_fill": 169.0,
+      "all_cohort_median": 169.0,
+      "train_median": 168.33,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_triglycerides": {
+      "imputed_rows": 68083,
+      "distinct_imputed_values": 1,
+      "single_fill": 79.0,
+      "all_cohort_median": 79.0,
+      "train_median": 76.0,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_tsh": {
+      "imputed_rows": 90513,
+      "distinct_imputed_values": 1,
+      "single_fill": 2.2515,
+      "all_cohort_median": 2.2515,
+      "train_median": 2.238,
+      "matches_all_median": true,
+      "matches_train_median": false
+    },
+    "lab_uric_acid": {
+      "imputed_rows": 87497,
+      "distinct_imputed_values": 1,
+      "single_fill": 4.1,
+      "all_cohort_median": 4.1,
+      "train_median": 4.0,
+      "matches_all_median": true,
+      "matches_train_median": false
+    }
+  },
+  "clinical_provenance": {
+    "raw_labs_have_unit_column": false,
+    "raw_diagnoses_have_date_column": false,
+    "missing_diagnosis_count_patients": 225
+  },
+  "corrected_splits": {
+    "counts": {
+      "train": 187,
+      "validation": 47,
+      "calibration": 39,
+      "test": 39
+    },
+    "pairwise_overlap": {
+      "train_validation": 0,
+      "train_calibration": 0,
+      "train_test": 0,
+      "validation_calibration": 0,
+      "validation_test": 0,
+      "calibration_test": 0
+    }
+  },
+  "corrected_scaler": {
+    "max_mean_error": 0.0,
+    "max_std_error": 3.552713678800501e-15
+  },
+  "corrected_daily": {
+    "rows": 234180,
+    "patients": 735,
+    "duplicate_days": 0,
+    "min_bins": 64,
+    "max_bins": 96,
+    "qualifying_patients": 312
+  },
+  "corrected_metrics": {
+    "last_day": {
+      "test_patients": 39,
+      "mae": {
+        "glucose_mean": 32.16411303658771,
+        "tir_70_180": 20.213066570840844,
+        "tbr_below_70": 4.4577973467130345,
+        "glucose_cv": 8.56157319240081
+      },
+      "max_mae_discrepancy_saved": 0.0
+    },
+    "past_7_day_mean": {
+      "test_patients": 39,
+      "mae": {
+        "glucose_mean": 25.53066922701322,
+        "tir_70_180": 16.54815615108408,
+        "tbr_below_70": 3.429624050280235,
+        "glucose_cv": 6.765123235262357
+      },
+      "max_mae_discrepancy_saved": 0.0
+    },
+    "past_30_day_mean": {
+      "test_patients": 39,
+      "mae": {
+        "glucose_mean": 23.32967080662393,
+        "tir_70_180": 15.27100324146768,
+        "tbr_below_70": 3.67796826346053,
+        "glucose_cv": 6.5398616138686485
+      },
+      "max_mae_discrepancy_saved": 0.0
+    },
+    "vae_gru": {
+      "test_patients": 39,
+      "mae": {
+        "glucose_mean": 23.966229349913355,
+        "tir_70_180": 15.577700943123084,
+        "tbr_below_70": 3.652503533595571,
+        "glucose_cv": 6.5650876859618315
+      },
+      "max_mae_discrepancy_saved": 1.384659054082249e-07,
+      "coverage": {
+        "glucose_mean": 0.7743589743589744,
+        "tir_70_180": 0.773931623931624,
+        "tbr_below_70": 0.7722222222222223,
+        "glucose_cv": 0.7914529914529914
+      }
+    }
+  },
+  "corrected_calibration": {
+    "patients": 39,
+    "conformal_rank_1based": 32,
+    "max_radius_discrepancy": 9.18764266089056e-06,
+    "latent_scale_train_only": true,
+    "manifest_hashes_verified": true
+  }
+}

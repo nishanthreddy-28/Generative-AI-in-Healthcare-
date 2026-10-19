@@ -1,0 +1,10 @@
+{
+  "Phase_4_RAG_Support/ada_guidelines_faiss.index": {
+    "dimension": 256,
+    "vectors": 6
+  },
+  "evidence/audit_20261011/fixture_rag512.index": {
+    "dimension": 512,
+    "vectors": 6
+  }
+}
