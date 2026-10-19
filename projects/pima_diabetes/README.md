@@ -1,234 +1,86 @@
-> This project was moved intact from the repository root. Run all commands below from `projects/pima_diabetes`. The eight-phase framework below includes planned capabilities; this implementation is a Pima classifier with retrieval and explanation. Its test-set model selection and ungrounded chat defaults require correction before publication.
+# Pima diabetes · Clinicagen
 
-# Patient-Centric Future Simulation for Diabetes Care using Generative AI
+An SVM diabetes classifier with a conversational interface and medical-source explanations.
 
-A generative AI pipeline that transforms raw patient records into probabilistic health trajectories, evidence-grounded clinical insights, and healthcare cost planning.
+Clinicagen collects the eight Pima input features, runs a saved scikit-learn model, and shows the prediction alongside a local feature-sensitivity analysis. The analysis endpoint retrieves relevant medical passages and can use Groq to compose a structured explanation with source references.
 
----
+The dataset has **768 records**, eight input features, and a binary `Outcome` label. This is a cross-sectional classification experiment. Its output is a model classification, not a diagnosis or a forecast of disease progression.
 
-# Problem Statement
+## How the analysis works
 
-Diabetes care should proactively predict how a patient’s condition will change under different treatments using a complete and unified medical history.
-
-However, diabetes data remains fragmented across reports, so disease progression and risks are not systematically anticipated in India’s healthcare setting. This gap leads to preventable complications, delayed interventions, and significant long-term financial burden for patients.
-
-Therefore, a patient-centered approach is needed to convert diabetes records into predictive, explainable insights that guide effective and affordable treatment decisions.
-
----
-
-# Objectives
-
-![Core Objectives](../../docs/architecture/objectives.png)
-
----
-
-# Key Features
-
-- **Longitudinal Patient Modeling:** Unifies scattered lab reports into time-aware patient timelines, enabling trend detection over isolated snapshots.
-
-- **Compact Health Representations:** Reduces high-dimensional patient history into latent health states.
-
-- **Synthetic Patient Generation:** Generates realistic synthetic populations to overcome data scarcity and privacy barriers in EHR-based training.
-
-- **Probabilistic Forecasting:** Simulates a range of plausible future health trajectories per patient, replacing false certainty with realistic risk spread.
-
-- **Similarity-Based Risk Reasoning:** Grounds risk assessment in real historical outcomes — surfacing what happened to patients with similar trajectories.
-
-- **Evidence-Grounded Insights:** Anchors every LLM output to retrieved clinical guidelines, eliminating speculation in clinical responses.
-
-- **Explainable Clinical Reasoning:** Delivers step-by-step reasoning a patient can understand.
-
-- **Risk-Adjusted Cost Planning:** Converts predicted trajectories into concrete cost estimations for proactive insurance and treatment planning.
-
----
-
-# Technology Stack
-
-| Category | Key Technologies |
-|---|---|
-| Languages | Python |
-| Data Processing | NumPy, Pandas, SciSpacy |
-| Generative Modeling | GANs, VAEs, Conditional Tabular GANs (CTGAN) |
-| Sequential Modeling | LSTM, Dynamic Time Warping (DTW) |
-| Deep Learning Framework | PyTorch |
-| ML Utilities | Scikit-Learn |
-| Knowledge Retrieval | RAG, FAISS, Pinecone, OpenAI Embeddings |
-| Explainability / Reasoning | LLMs, LangChain, Chain-of-Thought (CoT) |
-| LLM API | OpenAI API |
-
----
-
-# Patient-Centric Future Simulation Framework for Diabetes Care
-
-![Architecture Diagram](../../docs/architecture/architecture.png)
-
----
-
-# Detailed Architecture (8 Phases)
-
-## Phase 1 — Data Collection and Patient Record Ingestion
-
-Organize and clean raw patient lab reports into structured longitudinal timelines.
-
-- Longitudinal Data Representation
-- Medical Data Cleaning and Normalisation
-
-**Output:** Structured patient timelines
-
----
-
-## Phase 2 — Compact Health State Representation
-
-Compress patient health history into dense latent vectors using Variational AutoEncoders.
-
-- AutoEncoders (Encoder–Decoder)
-- Variational AutoEncoders (VAE)
-
-**Output:** Latent health states representing patient condition
-
----
-
-## Phase 3 — Synthetic Data Generation
-
-Generate privacy-preserving synthetic patient data and model diabetes disease progression trends.
-
-- Generative Adversarial Networks (Generator and Discriminator)
-- Conditional Tabular GANs (CTGAN)
-
-**Output:** Synthetic data generation using CTGAN; modeled disease progression trends
-
----
-
-## Phase 4 — Future Trajectory Simulation
-
-Generate multiple plausible diabetes-centric future health trajectories per patient using probabilistic forecasting.
-
-- Sequential Generation
-- Probabilistic Sampling
-- Monte Carlo Rollouts
-- Temporal Generative Models
-
-**Output:** Multiple plausible diabetes-centric trajectories per patient
-
----
-
-## Phase 5 — Similarity-Based Risk Reasoning
-
-Identify nearest-neighbour trajectories from historical data to estimate risk and support clinical decision-making.
-
-- Cosine Similarity and Euclidean Distance
-- Dynamic Time Warping (DTW)
-- LSTM-based sequence comparison
-
-**Output:** Risk estimation based on similar patient patterns; decision-making support
-
----
-
-## Phase 6 — Evidence-Grounded Knowledge Retrieval
-
-Retrieve clinically relevant guidelines and past records using RAG to ground LLM responses and prevent hallucinations.
-
-- Retrieval-Augmented Generation (RAG)
-- Vector Embeddings for semantic search
-
-**Output:** Clinical guideline retrieval; semantically grounded context for LLMs
-
----
-
-## Phase 7 — Explainable Clinical Insights
-
-Generate transparent, doctor-friendly clinical insights with step-by-step reasoning over patient trajectories.
-
-- Chain-of-Thought (CoT) Reasoning
-- Medical Insight Generation
-- Agent Reasoning via LangChain
-
-**Output:** Patient-friendly CoT reasoning; trajectory simulation with references and insights using LLMs
-
----
-
-## Phase 8 — Risk-Adjusted Cost Planning
-
-Estimate future healthcare costs from predicted trajectories and deliver actionable insurance planning insights.
-
-- Risk Band Mapping
-- Cost Modeling
-
-**Output:** Estimation of future healthcare cost; risk-adjusted financial planning recommendations
-
----
-
-# Pima Indians Diabetes ML + RAG + LLM Pipeline (Clinicagen Implementation)
-
-This section documents the implementation of the **Clinicagen Chatbot** which integrates Phase 6 and Phase 7 of the architecture into a conversational healthcare application.
-
-## Clinicagen Architecture
-
-```
-PIMA PATIENT INPUT (8 features)
-         │
-         ▼
-  INPUT VALIDATION
-  (type, range, zero-as-missing)
-         │
-         ▼
-  PREPROCESSING & PREDICTION
-  (MedianImputer → StandardScaler → SVM Classifier)
-         │
-    ┌────┴────┐
-    ▼         ▼
-  CLASS     MODEL
-  LABEL   CONFIDENCE
-    └────┬────┘
-         │
-         ▼
-  LOCAL SENSITIVITY ANALYSIS
-  (deterministic ±1σ perturbation)
-         │
-         ▼
-     RAG QUERY
-  (context-aware query generation)
-         │
-         ▼
-    FAISS SEARCH
-  (BAAI/bge-base-en-v1.5 embeddings)
-         │
-         ▼
-  RETRIEVED MEDICAL CHUNKS
-  (CDC + NIDDK literature)
-         │
-         ▼
-  GROQ LLM (openai/gpt-oss-120b)
-  (Grounded context + structured JSON response)
-         │
-         ▼
-  EXPLANATION CARDS & RICH HTML CHAT
+```text
+Eight numeric inputs
+    → validation and zero-as-missing handling
+    → saved KNN imputer and standard scaler
+    → SVM classification and local sensitivity
+    → medical-source retrieval
+    → structured explanation with citations
 ```
 
-### Installation
+The medical corpus is built from sources listed in [`source_registry.json`](data/medical_docs/source_registry.json). Retrieval uses BGE embeddings and a local FAISS index. The frontend is plain HTML, CSS, and JavaScript; the backend is FastAPI.
+
+## Running Clinicagen
+
+Run commands from `projects/pima_diabetes` in a separate environment:
 
 ```bash
-# Install dependencies from lock file
-pip install -r requirements.lock
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
 ```
 
-### Fresh Setup
+On Windows, activate with `.venv\Scripts\activate` and copy `.env.example` using your shell's copy command. Set `GROQ_API_KEY` in `.env` for conversational input collection and LLM explanations. Keep the key out of Git.
 
-Run these commands in order to prepare the local index and assets:
+Prepare local artifacts on a fresh checkout:
 
 ```bash
-# 1. Train/serialize SVM prediction model artifacts
-python scripts/rebuild_legacy_artifacts.py --force
-
-# 2. Run artifact validation suite
+python scripts/rebuild_legacy_artifacts.py
 python scripts/artifact_gate.py
-
-# 3. Download source guidelines from NIDDK & CDC
 python scripts/download_medical_sources.py
-
-# 4. Generate local FAISS vector embeddings
 python scripts/build_index.py
-
-# 5. Start the FastAPI API server
-uvicorn app:app --reload --host 127.0.0.1 --port 8000
 ```
+
+The rebuild command fits models to reproduce the historical experiment; it is not just a file download. It checks the selected model/metrics before writing artifacts. The source and embedding steps need network access on first setup. Model binaries, downloaded source documents, and the index are excluded from Git.
+
+Start the backend:
+
+```bash
+python -m uvicorn app:app --host 127.0.0.1 --port 8000
+```
+
+In another terminal, from the same project directory, serve the frontend:
+
+```bash
+python -m http.server 5500 --directory frontend
+```
+
+Open [localhost:5500](http://localhost:5500). API documentation is available at [localhost:8000/api/docs](http://localhost:8000/api/docs). If you change ports, update the frontend API address and configured CORS origins together.
+
+## Files
+
+- `Pima.ipynb` contains the classification experiments.
+- `services/` handles prediction, sensitivity, and the analysis workflow.
+- `rag/` loads, chunks, embeds, and retrieves medical passages.
+- `llm/` handles conversational feature collection and structured explanations.
+- `frontend/` contains the browser interface.
+- `scripts/` rebuilds/verifies artifacts and evaluates retrieval.
+- `tests/` covers API behavior, schemas, prediction, and retrieval components.
+
+## Evaluation status
+
+The saved metadata records 84.4% test accuracy, 0.80 F1, and 0.898 ROC AUC for the historical SVM experiment. The rebuild script chooses the best model using that same test set, so these are development results rather than an untouched final evaluation. Model selection needs a separate validation/CV protocol before publication.
+
+The chat collector also has a known issue: it can substitute a positive label and 80.8% when prediction context is missing. General follow-up chat does not itself retrieve evidence. These paths need correction before describing the whole conversation as grounded in model results and sources.
+
+Run the full suite after preparing its required assets:
+
+```bash
+python -m pytest tests -q
+```
+
+An offline subset passed 49 tests on 19 October 2026; 22 were skipped for missing assets and four real embedding tests were excluded. A full fresh-install/end-to-end pass is not claimed.
+
+## Data and use
+
+`diabetes.csv` is the existing dataset copy used by the notebooks. Its exact source and prior preprocessing need provenance documentation before reuse in a paper. The model's training population limits how its outputs should be interpreted. This project is for research and educational use.

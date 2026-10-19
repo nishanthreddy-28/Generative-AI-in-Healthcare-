@@ -1,17 +1,74 @@
 # Generative AI in Healthcare
 
-Research projects organized by dataset. Each project has its own input contract, environment, entrypoints and evaluation; their results are not interchangeable.
+Diabetes research across three datasets, covering classification, medical report explanation, and glucose forecasting.
 
-- [Pima diabetes](projects/pima_diabetes/README.md): eight-feature binary classification with a FastAPI backend, frontend, medical retrieval and optional LLM explanations. Run commands from `projects/pima_diabetes`.
-- [Early-stage diabetes](projects/early_stage_diabetes/README.md): symptom-based classification notebook and 520-row dataset, formerly named `pre - diabetic`. This is not an independently established prediabetes class.
-- [Granada type 1 diabetes](projects/granada_t1d/README.md): five-phase longitudinal research project, local report assistant and experimental CGM forecasting. Run commands from `projects/granada_t1d`.
+The work started with tabular diabetes prediction and developed into a longitudinal project using T1DiabetesGranada. Each dataset has a separate folder because the patient populations, inputs, and prediction tasks are different. The Granada project also includes **ClearCare**, a local application for reviewing medical reports and exploring experimental glucose simulations.
 
-See the [dataset catalog](docs/dataset_catalog.md), [migration details](docs/REORGANIZATION.md), and [Granada IEEE readiness](projects/granada_t1d/docs/IEEE_READINESS.md).
+[Granada project](projects/granada_t1d) · [Pima application](projects/pima_diabetes) · [Early-stage notebook](projects/early_stage_diabetes) · [Research audit](projects/granada_t1d/docs/reports/RESEARCH_AUDIT_2026-10-19.md)
 
-## Research status
+## Projects
 
-These are educational research prototypes. Pima's historical model selection uses test scores. The early-stage notebook has repeated predictor profiles crossing its random split. Granada's corrected neural forecaster did not outperform the 30-day mean on held-out glucose MAE; its historical IEEE draft needs correction. There is no clinical validation or demonstrated zero-hallucination guarantee. Planned similarity-based reasoning and cost planning must not be treated as implemented evidence.
+### [T1DiabetesGranada](projects/granada_t1d)
 
-## Data and credentials
+The main longitudinal research project. It uses continuous glucose monitoring records to learn a representation of 30 observed days and forecast daily glucose metrics over the next 60 days. The project contains the original multimodal VAE/GAN experiments, a separate CGM-only VAE/GRU release, and the ClearCare report assistant.
 
-Pima and early-stage CSVs already present in this repository remain with their projects; their source attribution should be verified before reuse. Granada raw/derived patient data, checkpoints, indexes, notebook outputs and patient-level evidence are excluded from this source publication. Obtain authorized local assets as described in [Granada data access](projects/granada_t1d/DATA_ACCESS.md). Never commit environment secrets or uploaded reports. The code license does not supersede dataset/document terms.
+**Built with:** PyTorch, pandas, scikit-learn, Streamlit, and local document extraction.
+
+### [Pima diabetes](projects/pima_diabetes)
+
+An eight-feature diabetes classifier connected to **Clinicagen**, a FastAPI application with a chat interface. The analysis workflow combines an SVM prediction, local feature sensitivity, retrieval from medical sources, and an optional LLM explanation.
+
+**Built with:** scikit-learn, FastAPI, FAISS, BGE embeddings, and Groq.
+
+### [Early-stage diabetes](projects/early_stage_diabetes)
+
+A notebook comparing random forest, decision tree, and logistic regression models on a 520-record symptom dataset. This was previously stored as `pre - diabetic`; the folder name now reflects the dataset's binary classification task.
+
+**Built with:** pandas and scikit-learn.
+
+## Getting started
+
+```bash
+git clone https://github.com/nishanthreddy-28/Generative-AI-in-Healthcare-.git
+cd Generative-AI-in-Healthcare-
+```
+
+Choose a project and follow its setup instructions. There is no shared environment: install dependencies and run commands from that project's directory.
+
+For the Granada report assistant:
+
+```bash
+cd projects/granada_t1d
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements/app.txt
+python -m streamlit run app.py
+```
+
+Open [localhost:8501](http://localhost:8501). On Windows, activate the environment with `.venv\Scripts\activate`.
+
+Report explanation can run without the Granada patient dataset. Forecasting needs authorized local data/model artifacts; see [data access](projects/granada_t1d/DATA_ACCESS.md). The Pima chatbot has its own [setup and API configuration](projects/pima_diabetes#running-clinicagen).
+
+## Repository layout
+
+```text
+projects/
+  granada_t1d/            Longitudinal research and ClearCare
+  pima_diabetes/         Pima classifier and Clinicagen
+  early_stage_diabetes/ Symptom-classification notebook
+docs/
+  dataset_catalog.md    Dataset sources and task descriptions
+  architecture/         Earlier project diagrams
+```
+
+## Results and research notes
+
+The corrected Granada release was evaluated on 39 held-out patients. Its glucose MAE was **23.97 mg/dL**, compared with **23.33 mg/dL** for a 30-day mean baseline. These results, the preprocessing checks, and the limitations are documented in the [model card](projects/granada_t1d/docs/models/CGM_MODEL_CARD.md) and [research audit](projects/granada_t1d/docs/reports/RESEARCH_AUDIT_2026-10-19.md).
+
+The older experiments are retained for reference. Some need revised preprocessing or evaluation before their results can be used in a paper. The applications are research prototypes and are not clinically validated.
+
+## Data and license
+
+The Pima and early-stage CSVs remain with their respective projects. Dataset provenance and attribution are listed in the [dataset catalog](docs/dataset_catalog.md).
+
+Granada patient records, private checkpoints, and generated patient reports are excluded from Git. Access follows the source dataset's agreement. The repository's [MIT license](LICENSE) does not grant rights to third-party datasets or documents.

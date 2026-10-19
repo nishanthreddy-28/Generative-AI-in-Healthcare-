@@ -1,20 +1,18 @@
-# Phase 5: Integrated application
+# Phase 5 · ClearCare application
 
-The full ClearCare Streamlit interface, report/simulation CLI and corrected CGM training entry point live here. Shared backend modules are in `../src/healthcare_app`.
+The application brings report review and experimental glucose simulation into one local Streamlit interface.
 
-| Item | Purpose |
-|---|---|
-| `app.py` | Report review, cited explanations, timeline, summaries and optional research simulations |
-| `end_to_end_pipeline.py` | Report and research command-line workflows |
-| `train_corrected_release.py` | CGM aggregate preparation, model fitting, baseline comparison and calibration |
-| `models/cgm/release_001` | Versioned corrected weights, calibration, metadata and patient groups |
-| `models/cgm/daily_cgm.csv`, `data_quality.json` | Earlier corrected preparation artifacts retained for provenance |
+- `app.py` implements the interface; launch it with the root `app.py`.
+- `end_to_end_pipeline.py` provides report and simulation CLI commands.
+- `train_corrected_release.py` prepares fresh CGM aggregates and trains the separate corrected release, including baseline selection and calibration.
 
-Run from the BTP root:
+Shared backend code is in `../src/healthcare_app`. The private corrected release lives at `models/cgm/release_001/` in a complete authorized local installation. Those assets are excluded from Git.
 
-```powershell
+From the Granada project root:
+
+```bash
 python -m streamlit run app.py
 python end_to_end_pipeline.py --help
 ```
 
-Read [the model card](../docs/models/CGM_MODEL_CARD.md), [deployment instructions](../docs/RUN_AND_DEPLOY.md) and [project structure](../docs/PROJECT_STRUCTURE.md).
+See [setup](../README.md#setup), [model results](../docs/models/CGM_MODEL_CARD.md), and [data access](../DATA_ACCESS.md). Training requires a new empty output directory; it is separate from running the application.
