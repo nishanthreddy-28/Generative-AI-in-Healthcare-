@@ -1,25 +1,14 @@
-# Git ignore rules
-# =================
-
-# Environment — never commit secrets
+# Credentials and patient uploads
 .env
-
-# ML artifacts (joblib files are large binary files)
-*.joblib
-
-# Vector store (rebuilt from source documents)
-vector_store/
-
-# Downloaded medical documents (rebuilt from registry)
-data/medical_docs/*.pdf
-data/medical_docs/*.txt
-data/medical_docs/*.md
-data/medical_docs/source_manifest.json
-
-# Python
+.env.*
+!.env.example
+**/.streamlit/secrets.toml
+**/.streamlit/credentials.toml
+**/uploads/
+**/.runtime/
+# Generated environments and caches
 __pycache__/
 *.py[cod]
-*.pyo
 .pytest_cache/
 *.egg-info/
 dist/
@@ -27,17 +16,27 @@ build/
 .venv/
 venv/
 env/
-
-# Jupyter
 .ipynb_checkpoints/
-
-# OS
 .DS_Store
 Thumbs.db
-
-# IDE
 .vscode/
 .idea/
-
-# Logs
 *.log
+# Pima generated artifacts/documents
+*.joblib
+**/vector_store/
+projects/pima_diabetes/data/medical_docs/*.pdf
+projects/pima_diabetes/data/medical_docs/*.txt
+projects/pima_diabetes/data/medical_docs/*.md
+projects/pima_diabetes/data/medical_docs/source_manifest.json
+# Granada controlled patient-level assets
+projects/granada_t1d/**/*.csv
+projects/granada_t1d/**/*.pt
+projects/granada_t1d/**/*.pth
+projects/granada_t1d/**/*.npz
+projects/granada_t1d/**/*.npy
+projects/granada_t1d/**/*.index
+projects/granada_t1d/**/*.pdf
+projects/granada_t1d/Phase_5_Application/models/
+projects/granada_t1d/evidence/
+projects/granada_t1d/outputs/

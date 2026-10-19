@@ -1,0 +1,387 @@
+{
+  "version": 2,
+  "input_features": [
+    "glucose_mean",
+    "tir_70_180",
+    "tbr_below_70",
+    "glucose_cv"
+  ],
+  "history_days": 30,
+  "future_days": 60,
+  "mean": [
+    159.7440825662597,
+    62.47447746066748,
+    4.630177393485086,
+    31.854419906910437
+  ],
+  "std": [
+    38.53576630100417,
+    22.594381088013332,
+    7.91682145478331,
+    9.587243376507002
+  ],
+  "selected_model": "vae_gru",
+  "validation_scores": {
+    "last_day": 0.7841914545577049,
+    "past_7_day_mean": 0.6526185029866771,
+    "past_30_day_mean": 0.6287741860006453,
+    "vae_gru": 0.6263002946534393
+  },
+  "test_metrics": {
+    "last_day": {
+      "mae": {
+        "glucose_mean": 32.16411303658771,
+        "tir_70_180": 20.213066570840844,
+        "tbr_below_70": 4.4577973467130345,
+        "glucose_cv": 8.56157319240081
+      },
+      "rmse": {
+        "glucose_mean": 42.32682754086666,
+        "tir_70_180": 25.527188233582482,
+        "tbr_below_70": 7.733667942980205,
+        "glucose_cv": 10.938952910309354
+      },
+      "horizon_mae": {
+        "1": {
+          "glucose_mean": 26.657681587414864,
+          "tir_70_180": 16.94222520417691,
+          "tbr_below_70": 3.7020361345950095,
+          "glucose_cv": 7.913740549332056
+        },
+        "7": {
+          "glucose_mean": 29.669970781375202,
+          "tir_70_180": 18.555992345127823,
+          "tbr_below_70": 4.499755307537342,
+          "glucose_cv": 8.708070559379381
+        },
+        "30": {
+          "glucose_mean": 29.600110958784054,
+          "tir_70_180": 20.191924472762505,
+          "tbr_below_70": 4.144702876338108,
+          "glucose_cv": 9.369166741004356
+        },
+        "60": {
+          "glucose_mean": 40.0785896105644,
+          "tir_70_180": 19.975998339093167,
+          "tbr_below_70": 6.223803390182465,
+          "glucose_cv": 9.741048470521585
+        }
+      }
+    },
+    "past_7_day_mean": {
+      "mae": {
+        "glucose_mean": 25.53066922701322,
+        "tir_70_180": 16.54815615108408,
+        "tbr_below_70": 3.429624050280235,
+        "glucose_cv": 6.765123235262357
+      },
+      "rmse": {
+        "glucose_mean": 33.70616672391797,
+        "tir_70_180": 21.36744244189888,
+        "tbr_below_70": 6.131544830677055,
+        "glucose_cv": 8.789817299846982
+      },
+      "horizon_mae": {
+        "1": {
+          "glucose_mean": 23.761055579552284,
+          "tir_70_180": 14.90757900671589,
+          "tbr_below_70": 2.738209964032019,
+          "glucose_cv": 6.800521263709435
+        },
+        "7": {
+          "glucose_mean": 27.033207037510017,
+          "tir_70_180": 16.284247160380893,
+          "tbr_below_70": 3.5537653699544443,
+          "glucose_cv": 6.8317161951309595
+        },
+        "30": {
+          "glucose_mean": 27.29472898825621,
+          "tir_70_180": 18.604265231775596,
+          "tbr_below_70": 3.2920898486051486,
+          "glucose_cv": 6.296131867628831
+        },
+        "60": {
+          "glucose_mean": 31.855659093612278,
+          "tir_70_180": 17.93630308329023,
+          "tbr_below_70": 4.702288906120675,
+          "glucose_cv": 7.900172942723984
+        }
+      }
+    },
+    "past_30_day_mean": {
+      "mae": {
+        "glucose_mean": 23.32967080662393,
+        "tir_70_180": 15.27100324146768,
+        "tbr_below_70": 3.67796826346053,
+        "glucose_cv": 6.5398616138686485
+      },
+      "rmse": {
+        "glucose_mean": 30.429040088621477,
+        "tir_70_180": 19.248379788815214,
+        "tbr_below_70": 6.156521313675112,
+        "glucose_cv": 8.40220721009558
+      },
+      "horizon_mae": {
+        "1": {
+          "glucose_mean": 25.360255314753605,
+          "tir_70_180": 15.036713960843208,
+          "tbr_below_70": 2.821975665214734,
+          "glucose_cv": 6.3534608498597755
+        },
+        "7": {
+          "glucose_mean": 21.33343271108774,
+          "tir_70_180": 12.50080333611904,
+          "tbr_below_70": 3.855727883485647,
+          "glucose_cv": 6.082971719595102
+        },
+        "30": {
+          "glucose_mean": 26.33721728202624,
+          "tir_70_180": 17.068276124122814,
+          "tbr_below_70": 3.3895578988087482,
+          "glucose_cv": 6.629616321661533
+        },
+        "60": {
+          "glucose_mean": 27.18982892158704,
+          "tir_70_180": 16.3484866802509,
+          "tbr_below_70": 4.799874087174733,
+          "glucose_cv": 7.262639021262144
+        }
+      }
+    },
+    "vae_gru": {
+      "mae": {
+        "glucose_mean": 23.9662293442079,
+        "tir_70_180": 15.577700804657178,
+        "tbr_below_70": 3.6525035057040767,
+        "glucose_cv": 6.5650876843630135
+      },
+      "rmse": {
+        "glucose_mean": 31.494785046511907,
+        "tir_70_180": 19.74569732130578,
+        "tbr_below_70": 6.054398059289718,
+        "glucose_cv": 8.495700507769333
+      },
+      "horizon_mae": {
+        "1": {
+          "glucose_mean": 23.9808100633964,
+          "tir_70_180": 15.040466077028574,
+          "tbr_below_70": 2.8427575951038544,
+          "glucose_cv": 6.534899840840247
+        },
+        "7": {
+          "glucose_mean": 23.505450451856785,
+          "tir_70_180": 13.748650354266761,
+          "tbr_below_70": 3.8143610759636,
+          "glucose_cv": 6.366144504096839
+        },
+        "30": {
+          "glucose_mean": 26.244240187791586,
+          "tir_70_180": 17.571458013861786,
+          "tbr_below_70": 3.533080643576222,
+          "glucose_cv": 6.273150767695724
+        },
+        "60": {
+          "glucose_mean": 28.774062862121966,
+          "tir_70_180": 16.61325667056124,
+          "tbr_below_70": 4.6234007384993365,
+          "glucose_cv": 7.562391119582399
+        }
+      },
+      "nominal_80_interval_coverage": {
+        "glucose_mean": 0.7743589743589744,
+        "tir_70_180": 0.773931623931624,
+        "tbr_below_70": 0.7722222222222223,
+        "glucose_cv": 0.7914529914529914
+      }
+    }
+  },
+  "vae_test": {
+    "normalized_reconstruction_mse": 0.5538874864578247,
+    "latent_std_mean": 0.73067307472229
+  },
+  "window_counts": {
+    "train": 1948,
+    "validation": 557,
+    "calibration": 39,
+    "test": 39
+  },
+  "patient_counts": {
+    "train": 187,
+    "validation": 47,
+    "calibration": 39,
+    "test": 39
+  },
+  "epochs": 20,
+  "seed": 42,
+  "seconds": 106.57397409999976,
+  "source": "Fresh raw T1DiabetesGranada CGM aggregates; no original cleaned labs/scalers used",
+  "status": "Patient-held-out internal research evaluation; no external clinical validation or causal treatment modeling",
+  "interval": "Nominal 80% per-horizon/per-target split conformal; patient exchangeability assumption, not simultaneous or clinical coverage",
+  "generation": "Zero-mean low-rank Gaussian residual sensitivity model fitted on calibration histories; not a learned treatment-response generator",
+  "training_history": {
+    "vae": [
+      {
+        "epoch": 1,
+        "validation_reconstruction_mse": 0.8539925217628479
+      },
+      {
+        "epoch": 2,
+        "validation_reconstruction_mse": 0.8483290076255798
+      },
+      {
+        "epoch": 3,
+        "validation_reconstruction_mse": 0.8404114246368408
+      },
+      {
+        "epoch": 4,
+        "validation_reconstruction_mse": 0.8261035084724426
+      },
+      {
+        "epoch": 5,
+        "validation_reconstruction_mse": 0.7997924089431763
+      },
+      {
+        "epoch": 6,
+        "validation_reconstruction_mse": 0.7524124383926392
+      },
+      {
+        "epoch": 7,
+        "validation_reconstruction_mse": 0.6930650472640991
+      },
+      {
+        "epoch": 8,
+        "validation_reconstruction_mse": 0.6508979201316833
+      },
+      {
+        "epoch": 9,
+        "validation_reconstruction_mse": 0.6255367398262024
+      },
+      {
+        "epoch": 10,
+        "validation_reconstruction_mse": 0.6060342192649841
+      },
+      {
+        "epoch": 11,
+        "validation_reconstruction_mse": 0.5966361165046692
+      },
+      {
+        "epoch": 12,
+        "validation_reconstruction_mse": 0.5872594714164734
+      },
+      {
+        "epoch": 13,
+        "validation_reconstruction_mse": 0.5790764093399048
+      },
+      {
+        "epoch": 14,
+        "validation_reconstruction_mse": 0.5714783072471619
+      },
+      {
+        "epoch": 15,
+        "validation_reconstruction_mse": 0.5667641758918762
+      },
+      {
+        "epoch": 16,
+        "validation_reconstruction_mse": 0.5642322897911072
+      },
+      {
+        "epoch": 17,
+        "validation_reconstruction_mse": 0.5624404549598694
+      },
+      {
+        "epoch": 18,
+        "validation_reconstruction_mse": 0.5610305070877075
+      },
+      {
+        "epoch": 19,
+        "validation_reconstruction_mse": 0.5593046545982361
+      },
+      {
+        "epoch": 20,
+        "validation_reconstruction_mse": 0.5581943988800049
+      }
+    ],
+    "forecaster": [
+      {
+        "epoch": 1,
+        "validation_mse": 0.7106584906578064
+      },
+      {
+        "epoch": 2,
+        "validation_mse": 0.7043565511703491
+      },
+      {
+        "epoch": 3,
+        "validation_mse": 0.7003903985023499
+      },
+      {
+        "epoch": 4,
+        "validation_mse": 0.6972859501838684
+      },
+      {
+        "epoch": 5,
+        "validation_mse": 0.6941937804222107
+      },
+      {
+        "epoch": 6,
+        "validation_mse": 0.6908785104751587
+      },
+      {
+        "epoch": 7,
+        "validation_mse": 0.6873264312744141
+      },
+      {
+        "epoch": 8,
+        "validation_mse": 0.6835435032844543
+      },
+      {
+        "epoch": 9,
+        "validation_mse": 0.6797552704811096
+      },
+      {
+        "epoch": 10,
+        "validation_mse": 0.6758421063423157
+      },
+      {
+        "epoch": 11,
+        "validation_mse": 0.6719338893890381
+      },
+      {
+        "epoch": 12,
+        "validation_mse": 0.6673165559768677
+      },
+      {
+        "epoch": 13,
+        "validation_mse": 0.6633408665657043
+      },
+      {
+        "epoch": 14,
+        "validation_mse": 0.6591319441795349
+      },
+      {
+        "epoch": 15,
+        "validation_mse": 0.6553084850311279
+      },
+      {
+        "epoch": 16,
+        "validation_mse": 0.6524085998535156
+      },
+      {
+        "epoch": 17,
+        "validation_mse": 0.6495563387870789
+      },
+      {
+        "epoch": 18,
+        "validation_mse": 0.64613276720047
+      },
+      {
+        "epoch": 19,
+        "validation_mse": 0.6444824934005737
+      },
+      {
+        "epoch": 20,
+        "validation_mse": 0.6431037783622742
+      }
+    ]
+  }
+}

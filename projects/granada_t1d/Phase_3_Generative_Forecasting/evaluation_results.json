@@ -1,0 +1,47 @@
+{
+    "glucose_mean": {
+        "mae": 20.5,
+        "rmse": 27.11,
+        "pearson_r": 0.669,
+        "unit": "mg/dL"
+    },
+    "tir_70_180": {
+        "mae": 13.1,
+        "rmse": 16.77,
+        "pearson_r": 0.565,
+        "unit": "%"
+    },
+    "tbr_below_70": {
+        "mae": 4.74,
+        "rmse": 7.47,
+        "pearson_r": 0.681,
+        "unit": "%"
+    },
+    "tar_above_180": {
+        "mae": 13.29,
+        "rmse": 17.12,
+        "pearson_r": 0.622,
+        "unit": "%"
+    },
+    "glucose_cv": {
+        "mae": 6.09,
+        "rmse": 7.9,
+        "pearson_r": 0.508,
+        "unit": "%"
+    },
+    "gmi_estimated_a1c": {
+        "mae": 0.49,
+        "rmse": 0.65,
+        "pearson_r": 0.672,
+        "unit": "%"
+    },
+    "clarke_error_grid": {
+        "zone_a_pct": 74.09,
+        "zone_b_pct": 25.21,
+        "zone_a_b_combined_pct": 99.3,
+        "zone_c_pct": 0.0,
+        "zone_d_pct": 0.7,
+        "zone_e_pct": 0.0,
+        "total_pairs_evaluated": 57180
+    }
+}

@@ -1,0 +1,99 @@
+{
+    "glucose_mean": {
+        "mae": 15.34,
+        "rmse": 19.31,
+        "pearson_r": 0.851,
+        "real_mean": 149.21,
+        "synth_mean": 160.63,
+        "unit": "mg/dL"
+    },
+    "glucose_std": {
+        "mae": 6.58,
+        "rmse": 8.85,
+        "pearson_r": 0.684,
+        "real_mean": 46.48,
+        "synth_mean": 43.61,
+        "unit": "mg/dL"
+    },
+    "glucose_cv": {
+        "mae": 9.27,
+        "rmse": 10.3,
+        "pearson_r": 0.155,
+        "real_mean": 31.38,
+        "synth_mean": 40.03,
+        "unit": "mg/dL"
+    },
+    "tir_70_180": {
+        "mae": 7.43,
+        "rmse": 9.38,
+        "pearson_r": 0.808,
+        "real_mean": 67.86,
+        "synth_mean": 70.79,
+        "unit": "%"
+    },
+    "tbr_below_70": {
+        "mae": 3.29,
+        "rmse": 5.25,
+        "pearson_r": 0.804,
+        "real_mean": 5.73,
+        "synth_mean": 3.13,
+        "unit": "%"
+    },
+    "tbr_severe_54": {
+        "mae": 1.19,
+        "rmse": 2.6,
+        "pearson_r": 0.013,
+        "real_mean": 1.19,
+        "synth_mean": 0.01,
+        "unit": "%"
+    },
+    "tar_above_180": {
+        "mae": 6.53,
+        "rmse": 8.26,
+        "pearson_r": 0.872,
+        "real_mean": 26.41,
+        "synth_mean": 28.27,
+        "unit": "%"
+    },
+    "tar_severe_250": {
+        "mae": 3.98,
+        "rmse": 6.53,
+        "pearson_r": 0.84,
+        "real_mean": 6.87,
+        "synth_mean": 3.24,
+        "unit": "%"
+    },
+    "nocturnal_mean": {
+        "mae": 20.17,
+        "rmse": 25.08,
+        "pearson_r": 0.778,
+        "real_mean": 150.28,
+        "synth_mean": 162.1,
+        "unit": "mg/dL"
+    },
+    "nocturnal_hypo_count": {
+        "mae": 28.83,
+        "rmse": 43.33,
+        "pearson_r": 0.777,
+        "real_mean": 48.62,
+        "synth_mean": 40.63,
+        "unit": "events"
+    },
+    "gmi_estimated_a1c": {
+        "mae": 0.31,
+        "rmse": 0.42,
+        "pearson_r": 0.842,
+        "real_mean": 6.88,
+        "synth_mean": 6.72,
+        "unit": "%"
+    },
+    "lab_hba1c": {
+        "mae": 0.43,
+        "rmse": 0.55,
+        "pearson_r": 0.64,
+        "real_mean": 7.17,
+        "synth_mean": 7.04,
+        "unit": "%"
+    },
+    "correlation_matrix_frobenius_distance": 3.2028
+}

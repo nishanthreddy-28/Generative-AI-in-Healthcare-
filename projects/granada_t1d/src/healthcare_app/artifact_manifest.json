@@ -1,0 +1,5 @@
+{
+  "Phase_2_Latent_VAE/best_compact_vae.pt": "7d504371b34f1f2f5403af90216ea01ed328303a1cb5fea1c9fb2d2fc0ce2bba",
+  "Phase_3_Generative_Forecasting/best_ctgan_generator.pt": "d79723c63778e6984202b2e6ff708c89120fe8f7e5a13c2fa74b62841cdc9eea",
+  "Phase_3_Generative_Forecasting/best_trajectory_forecaster.pt": "5ccd82b9c17530484d154d3e4fb2bcef88203e12acfe9cbcd036b2f5f654ea28"
+}

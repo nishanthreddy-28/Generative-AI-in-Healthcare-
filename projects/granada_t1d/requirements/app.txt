@@ -1,0 +1,10 @@
+# Core application versions verified on Windows / Python 3.13.5.
+# A fresh installation/container build still needs independent verification.
+streamlit==1.55.0
+numpy==2.4.3
+pandas==2.3.3
+scikit-learn==1.8.0
+pypdf==6.16.2
+Pillow==12.1.1
+
+# Optional explicit paid LLM calls use openai from requirements.txt.

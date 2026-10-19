@@ -1,0 +1,18 @@
+{
+    "Baseline_LSTM": {
+        "glucose_mae": 20.99,
+        "glucose_rmse": 27.38,
+        "tir_mae": 13.25,
+        "tbr_mae": 5.03,
+        "hba1c_mae": 0.5,
+        "clarke_a_b": 99.45
+    },
+    "Conditional_Temporal_GAN": {
+        "glucose_mae": 46.07,
+        "glucose_rmse": 54.49,
+        "tir_mae": 22.07,
+        "tbr_mae": 4.65,
+        "hba1c_mae": 1.24,
+        "clarke_a_b": 98.42
+    }
+}

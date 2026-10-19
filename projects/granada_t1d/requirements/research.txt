@@ -1,0 +1,36 @@
+# ==============================================================================
+# BTP: Generative AI in Healthcare - T1D Clinical Intelligence Platform
+# Production Dependencies
+# ==============================================================================
+
+# Core ML / DL
+torch>=2.1.0
+numpy>=1.24.0
+
+# Data Processing
+pandas>=2.0.0
+scikit-learn>=1.3.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Vector Database / Retrieval
+faiss-cpu>=1.7.4
+
+# Clinical NLP (optional but recommended)
+# spacy>=3.7.0
+# scispacy>=0.5.4
+# Model: pip install https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.4/en_core_sci_sm-0.5.4.tar.gz
+
+# Web Application
+streamlit>=1.32.0
+
+# LLM Integration (optional, explicit consent; strict structured outputs)
+openai>=2.0.0,<4
+
+# Development / Utilities
+python-dotenv>=1.0.0
+
+# Local report extraction
+pypdf>=6.0.0,<7
+Pillow>=11.0.0,<13

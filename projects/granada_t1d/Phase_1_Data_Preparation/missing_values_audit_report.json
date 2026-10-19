@@ -1,0 +1,27 @@
+{
+    "Patient_info": {
+        "total_patients": 736,
+        "excluded_no_lab_patients": 13,
+        "uncomplicated_t1d_patients": 225,
+        "retained_multimodal_cohort": 723
+    },
+    "Diagnostics": {
+        "total_records": 1757,
+        "patients_with_comorbidities": 511,
+        "missing_cells": 0
+    },
+    "Biochemical_parameters": {
+        "total_records": 87482,
+        "missing_cells": 0,
+        "biomarkers_count": 17,
+        "hba1c_patient_coverage": 720
+    },
+    "Glucose_measurements": {
+        "total_rows_audited": 22671708,
+        "days_audited": 257782,
+        "clinically_valid_days_percentage": 90.08,
+        "full_wear_days_count": 171530,
+        "valid_70pct_days_count": 232200,
+        "sparse_changeover_days_count": 25582
+    }
+}

@@ -1,0 +1,38 @@
+[
+    {
+        "id": "ADA-GLYCEMIC-TARGETS",
+        "category": "Glycemic Goals & CGM Consensus",
+        "title": "ADA Standards of Care Chapter 6: Ambulatory Glucose Profile (AGP) Targets",
+        "content": "For non-pregnant adults with Type 1 Diabetes using Continuous Glucose Monitoring (CGM): Time in Range (TIR, 70-180 mg/dL) target is > 70% of readings. Time Below Range (TBR < 70 mg/dL) must be < 4%, with severe hypoglycemia (< 54 mg/dL) strictly < 1%. Time Above Range (TAR > 180 mg/dL) should be < 25%. For frail older adults or patients with severe hypoglycemia unawareness, the TIR goal is adjusted to > 50% and TBR < 1%. Glucose Coefficient of Variation (%CV) target is <= 36%, reflecting stable glycemic variability."
+    },
+    {
+        "id": "ADA-HYPO-MANAGEMENT",
+        "category": "Hypoglycemia Protocols & Basal Titration",
+        "title": "ADA Standards of Care Chapter 13: Nocturnal Hypoglycemia Prevention and Insulin Adjustment",
+        "content": "Hypoglycemia (glucose < 70 mg/dL) is a medical emergency requiring immediate treatment with 15-20g of fast-acting carbohydrate (Rule of 15), re-testing after 15 minutes. In patients exhibiting recurrent nocturnal hypoglycemia between 00:00 and 06:00, clinicians should evaluate bedtime basal insulin. Recommended clinical actions include: (1) reducing evening or bedtime basal insulin dose by 10% to 20%, (2) advancing basal rate attenuation 2 hours prior to the suspected nadir for automated insulin delivery / pump users, and (3) screening for hypoglycemia unawareness."
+    },
+    {
+        "id": "ADA-NEPHROPATHY-KIDNEY",
+        "category": "Microvascular Complications: Kidney Disease",
+        "title": "ADA Standards of Care Chapter 11: Chronic Kidney Disease and Microalbuminuria Monitoring",
+        "content": "At least once annually, assess urinary albumin (e.g., spot urinary albumin-to-creatinine ratio, uACR) and estimated glomerular filtration rate (eGFR) in all patients with Type 1 Diabetes with duration >= 5 years. In patients with established microalbuminuria (uACR >= 30 mg/g) or elevated serum creatinine, initiate an ACE inhibitor or Angiotensin Receptor Blocker (ARB) to slow renal disease progression. Target blood pressure in diabetic kidney disease is < 130/80 mmHg."
+    },
+    {
+        "id": "ADA-RETINOPATHY-EYE",
+        "category": "Microvascular Complications: Retinopathy",
+        "title": "ADA Standards of Care Chapter 12: Diabetic Retinopathy Screening and Glycemic Control Velocity",
+        "content": "Patients with Type 1 Diabetes should have an initial dilated and comprehensive eye examination by an ophthalmologist or optometrist within 5 years after onset, and annually thereafter. Caution: In patients with long-standing poorly controlled diabetes (e.g. HbA1c > 9%) and active proliferative or severe non-proliferative retinopathy, rapid reduction of HbA1c (> 2% drop within 3 months) can trigger transient worsening ('early worsening') of diabetic retinopathy. Glycemic optimization should proceed gradually alongside intensive retinal surveillance."
+    },
+    {
+        "id": "ADA-CARDIOVASCULAR-LIPID",
+        "category": "Macrovascular Complications: Dyslipidemia & Hypertension",
+        "title": "ADA Standards of Care Chapter 10: Cardiovascular Disease and Risk Management",
+        "content": "For patients with Type 1 Diabetes aged >= 40 years or those with additional cardiovascular risk factors (hypertension, smoking, dyslipidemia, microalbuminuria), moderate- to high-intensity statin therapy is indicated regardless of baseline LDL cholesterol. The primary goal is LDL-C reduction by >= 50% from baseline and target LDL-C < 70 mg/dL (< 55 mg/dL if established ASCVD). Blood pressure should be controlled to < 130/80 mmHg using ACE inhibitors or ARBs as first-line therapy."
+    },
+    {
+        "id": "ADA-THYROID-AUTOIMMUNE",
+        "category": "Associated Autoimmune Conditions",
+        "title": "ADA Standards of Care Chapter 4: Thyroid Disease and Poly-Autoimmune Screening",
+        "content": "Patients with Type 1 Diabetes have an increased prevalence of other autoimmune disorders, predominantly autoimmune thyroid disease (Hashimoto's thyroiditis or Graves' disease in 17-30% of patients). Screen for thyroid-stimulating hormone (TSH) at diagnosis and periodically (every 1-2 years) or if symptoms develop. Unrecognized hypothyroidism can significantly impair counter-regulatory glucose responses and precipitate recurrent, severe, unexplained hypoglycemia."
+    }
+]
